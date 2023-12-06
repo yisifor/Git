@@ -1,4 +1,6 @@
+# 工作流名称
 name: learn-github-actions
+# 运行列表中的工作流名称
 run-name: ${{ github.actor }} is learning GitHub Actions
 on: [push]
 jobs:
