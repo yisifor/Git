@@ -2,14 +2,25 @@ on: [push]
 
 jobs:
   hello_world_job:
+    # job运行环境
     runs-on: ubuntu-latest
-    name: A job to say hello
+    # job的名称或功能说明
+    name: A job to say hello 
     steps:
+      # 步骤的名称或功能说明
       - name: Hello world action step
+        # 步骤id
         id: hello
+        # 步骤使用的action(github仓库地址去除https://github.com/前缀,@拼接仓库分支或tag,使用的action的文件入口是该仓根目录下的action.yml文件)
         uses: yisifor/action_hello@main
+        # with用来显示声明action的输入参数
         with:
+          # key为参数名，value为参数值
           who-to-greet: 'Mona the Octocat'
       # Use the output from the `hello` step
+      # 步骤的名称或功能说明
       - name: Get the output time
+        # run与uses类似，都是执行action操作，run是自定义操作，uses是引用别人写好的操作
+        # ${{参数名}}是github action用来表示变量的方式。steps.hello指定步骤列表中下id为hello的步骤，outputs固定写法，表示步骤action的输出。time表示某个输出参数名
+        # action输出变量统一保存在$GITHUB_OUTPUT文件中。故action脚本生成输出变量time，需要包含echo "time=$time" >> $GITHUB_OUTPUT命令。
         run: echo "The time was ${{ steps.hello.outputs.time }}"
