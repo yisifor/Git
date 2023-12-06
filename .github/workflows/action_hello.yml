@@ -1,5 +1,7 @@
 # 工作流名称
 name: test_action_hello
+# 工作流列表中显示的工作流名称，没有则显示本次事件触发时的信息，比如push事件用commit信息代替
+run-name: ${{ github.actor }} is testing action_hello 🚀
 on: [push]
 jobs:
   hello_world_job:
