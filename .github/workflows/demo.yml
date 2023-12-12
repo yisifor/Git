@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN  }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN  }} # secrets.TOKEN是在git仓的setting中的actions中设置的，其中TOEKN的值又是在账号下的token中设置的
           ISSUE_URL: ${{ github.event.issue.html_url }}
         run: |
-          gh issue edit $ISSUE_URL --add-label "bug"
+          gh issue edit $ISSUE_URL --add-label "bug" # 给issue打上bug标签
