@@ -11,7 +11,6 @@ jobs:
     steps:
       - env:
           GITHUB_TOKEN: ${{ secrets.TOKEN  }}
-          GH_TOKEN: ${{ secrets.TOKEN  }}
           ISSUE_URL: ${{ github.event.issue.html_url }}
         run: |
           gh issue edit $ISSUE_URL --add-label "triage_yisi"
