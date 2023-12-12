@@ -1,19 +1,16 @@
-name: Build
-run-name: Build failed info
-on: push
+name: github_action_issue_demo
+run-name: github_action_issue_demo
+on:
+  issues:
+    types:
+      - opened
 
 jobs:
-  build:
+  label_issue:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Build with logs
+      - env:
+          GITHUB_TOKEN: ${{ secrets.MY_TOKEN }}
+          ISSUE_URL: ${{ github.event.issue.html_url }}
         run: |
-          touch ${{ runner.temp }}/build.logs
-          ./build.sh ${{ runner.temp }}/build.logs
-      - name: Upload logs on fail
-        if: ${{ failure() }}
-        uses: actions/upload-artifact@v3
-        with:
-          name: Build failure logs
-          path: ${{ runner.temp }}/build.logs
+          gh issue edit $ISSUE_URL --add-label "triage_yisi"
